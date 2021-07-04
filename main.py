@@ -15,19 +15,28 @@ class bcolors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
-# Get OS username
+# Getting OS username
 try:
     username = getpass.getuser()
 except Exception:
     username = 'usuário'
-print(f'{bcolors.HEADER}\nSaudações {username}!\n')
+print(f'{bcolors.HEADER}\nSaudações {username}!\n{bcolors.ENDC}')
+print('====================================================================================================')
+print(f'{bcolors.UNDERLINE}Este programa permite a criação e visualização de um grafo knn com o intuito de encontrar o caminho \n'+
+'entre dois vértices utilizando de diferentes tipos de algoritmos de busca. Além disso, é possivel\n'+
+'gerar diferentes visualizações gráficas do comportamento de cada um dos algortimos.')
+print('====================================================================================================\n')
 
-# Get number of vertices and number of neighbors
+# Getting number of vertices and number of neighbors
+print(f'Primeiro, vamos criar um grafo knn!\n')
 while True:
     try:
-        numberOfVertices = int(input(f'{bcolors.OKBLUE}Digite o número de vértices:{bcolors.ENDC} '))
-        k = int(input(f'{bcolors.OKBLUE}Digite o número de vizinhos:{bcolors.ENDC} '))
-        break
+        numberOfVertices = int(input(f'{bcolors.OKBLUE}Digite o número de vértices do grafo: {bcolors.ENDC}'))
+        k = int(input(f'{bcolors.OKBLUE}Digite o número de vizinhos de cada vértice: {bcolors.ENDC}'))
+        if k > 0 and numberOfVertices > k:
+            break
+        else:
+            print(f'{bcolors.FAIL}ERRO: o número de vizinhos deve ser maior do que 0 e o número de vértices deve ser maior que o número de vizinhos{bcolors.ENDC}')
     except Exception:
         print(f'{bcolors.FAIL}ERRO: digite apenas números inteiros{bcolors.ENDC}')
 
@@ -41,6 +50,20 @@ print(f'{bcolors.OKCYAN}Criando grafo knn...\n{bcolors.ENDC}')
 knn_graph = kneighbors_graph(vertexArray, k, mode='connectivity')
 knn_graph = knn_graph.toarray()
 print(f'Grafo knn criado com {bcolors.OKGREEN}Sucesso!\n{bcolors.ENDC}')
+
+# Getting two input vertices
+print(f'Agora vamos tentar encontrar o caminho entre dois vértices!\n')
+while True:
+    try:
+        startVertex = int(input(f'{bcolors.OKBLUE}Vértice inicial: {bcolors.ENDC}'))
+        endVertex = int(input(f'{bcolors.OKBLUE}Vértice final: {bcolors.ENDC}'))
+        if startVertex > 0 and endVertex > 0 and startVertex != endVertex and startVertex < numberOfVertices and endVertex < numberOfVertices:
+            break
+        else:
+            print(f'{bcolors.FAIL}ERRO: os vértices devem ser maiores ou iguais a 0 e menores do que {numberOfVertices}, não podem ser iguais{bcolors.ENDC}')
+    except Exception:
+        print(f'{bcolors.FAIL}ERRO: digite apenas números inteiros{bcolors.ENDC}')
+
 
 # Ploting knn_graph
 print(f'{bcolors.OKCYAN}Plotando grafo knn...\n{bcolors.ENDC}')

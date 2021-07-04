@@ -28,17 +28,18 @@ print(f'{bcolors.UNDERLINE}Este programa permite a criação e visualização de
 print('====================================================================================================\n')
 
 # Getting number of vertices and number of neighbors
-print(f'Primeiro, vamos criar um grafo knn!\n')
+print('Primeiro, vamos criar um grafo knn!\n')
 while True:
     try:
+        print(f'{bcolors.WARNING}AVISO: quanto maior o número de vértices e vizinhos maior será o tempo de execução e uso de memória.\n{bcolors.ENDC}')
         numberOfVertices = int(input(f'{bcolors.OKBLUE}Digite o número de vértices do grafo: {bcolors.ENDC}'))
         k = int(input(f'{bcolors.OKBLUE}Digite o número de vizinhos de cada vértice: {bcolors.ENDC}'))
-        if k > 0 and numberOfVertices > k:
+        if k > 0 and numberOfVertices > k: 
             break
         else:
-            print(f'{bcolors.FAIL}ERRO: o número de vizinhos deve ser maior do que 0 e o número de vértices deve ser maior que o número de vizinhos{bcolors.ENDC}')
+            print(f'{bcolors.FAIL}ERRO: o número de vizinhos deve ser maior do que 0 e o número de vértices deve ser maior que o número de vizinhos\n{bcolors.ENDC}')
     except Exception:
-        print(f'{bcolors.FAIL}ERRO: digite apenas números inteiros{bcolors.ENDC}')
+        print(f'{bcolors.FAIL}ERRO: digite apenas números inteiros\n{bcolors.ENDC}')
 
 # Generating ramdom vertices
 print(f'\n{bcolors.OKCYAN}Gerando vértices aleatórios...\n{bcolors.ENDC}')
@@ -52,7 +53,7 @@ knn_graph = knn_graph.toarray()
 print(f'Grafo knn criado com {bcolors.OKGREEN}Sucesso!\n{bcolors.ENDC}')
 
 # Getting two input vertices
-print(f'Agora vamos tentar encontrar o caminho entre dois vértices!\n')
+print('Agora vamos tentar encontrar o caminho entre dois vértices!\n')
 while True:
     try:
         startVertex = int(input(f'{bcolors.OKBLUE}Vértice inicial: {bcolors.ENDC}'))
@@ -60,9 +61,28 @@ while True:
         if startVertex > 0 and endVertex > 0 and startVertex != endVertex and startVertex < numberOfVertices and endVertex < numberOfVertices:
             break
         else:
-            print(f'{bcolors.FAIL}ERRO: os vértices devem ser maiores ou iguais a 0 e menores do que {numberOfVertices}, não podem ser iguais{bcolors.ENDC}')
+            print(f'{bcolors.FAIL}ERRO: os vértices devem ser maiores ou iguais a 0 e menores do que {numberOfVertices}, não podem ser iguais\n{bcolors.ENDC}')
     except Exception:
-        print(f'{bcolors.FAIL}ERRO: digite apenas números inteiros{bcolors.ENDC}')
+        print(f'{bcolors.FAIL}ERRO: digite apenas números inteiros\n{bcolors.ENDC}')
+
+# Choosing algorithm to perform search
+print('\nAgora escolha qual algoritmo para realizar a busca (número correspondente):\n')
+while True:
+    try:
+        print(f'{bcolors.OKBLUE}1- Busca em largura')
+        print('2- Busca em profundidade')
+        print('3- Busca best first')
+        print('4- A')
+        print('5- A*')
+        print(f'6- Todos os anteriores{bcolors.ENDC}\n')
+        print('Pressione 0 para sair...\n')
+        option = int(input(f'{bcolors.OKBLUE}Opção: {bcolors.ENDC}'))
+        if option >= 0 and option <=6:
+            break
+        else:
+            print(f'{bcolors.FAIL}ERRO: escolha uma das opções de 1 a 6, ou 0 para sair\n{bcolors.ENDC}')
+    except Exception:
+        print(f'{bcolors.FAIL}ERRO: digite apenas números inteiros\n{bcolors.ENDC}')
 
 
 # Ploting knn_graph

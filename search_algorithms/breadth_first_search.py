@@ -11,10 +11,10 @@ def breadthFirstSearch(graph, startNode, endNode):
             # Loop to iterate over the neighbours of the node
             for neighbour in neighbours:
                 new_path = list(path)
-                new_path.append(neighbour)
+                new_path.append(neighbour[0])
                 queue.append(new_path)
                 # Condition to check if the neighbour node is the endNode
-                if neighbour == endNode:
+                if neighbour[0] == endNode:
                     return new_path
             explored.append(node)
     return None

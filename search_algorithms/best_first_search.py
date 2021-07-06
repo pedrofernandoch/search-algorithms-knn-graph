@@ -1,6 +1,6 @@
 from queue import PriorityQueue
 
-def bestFirstSearch(graph, startVertex, endVertex):
+def bestFirstSearch(graph, startVertex, endVertex, vertexArray):
     visited = [False] * len(graph)
     pq = PriorityQueue()
     pq.put((0, startVertex))

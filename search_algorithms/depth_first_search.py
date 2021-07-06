@@ -1,4 +1,4 @@
-def depthFirstSearch(graph, startVertex, endVertex):
+def depthFirstSearch(graph, startVertex, endVertex, vertexArray):
     stack = [(startVertex, [startVertex])]
     while stack:
         (vertex, path) = stack.pop()

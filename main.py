@@ -9,7 +9,7 @@ from search_algorithms.depth_first_search import depthFirstSearch
 from search_algorithms.best_first_search import bestFirstSearch
 from search_algorithms.a_search import aSearch
 from search_algorithms.a_start_search import aStarSearch
-from utils.grpah import plotGraphWithPath, printGraphConnectivity
+from utils.graph import plotGraphWithPath, printGraphConnectivity
 from utils.colors import bcolors
 
 # Search Algorithms
@@ -98,7 +98,7 @@ while True:
         if option > 0 and option < 6:
             print(f'\n{bcolors.OKCYAN}Procurando caminho...{bcolors.ENDC}')
             start = time.time()
-            path = search_algorithms[option](knn_graph, startVertex, endVertex)
+            path = search_algorithms[option](knn_graph, startVertex, endVertex, vertexArray)
             stop = time.time()
             if path: # Path found
                 print(f'\nCaminho {bcolors.OKGREEN}encontrado{bcolors.ENDC}!\n')
@@ -126,6 +126,5 @@ while True:
         else:
             print(f'{bcolors.FAIL}\nERRO: escolha uma das opções de 1 a 6, ou 0 para sair.\n{bcolors.ENDC}')
     except Exception:
-        print(Exception)
         print(f'{bcolors.FAIL}\nERRO: digite apenas números inteiros.\n{bcolors.ENDC}')
 print(f'\n{bcolors.HEADER}Tchau Tchau, até a próxima! :){bcolors.ENDC}')

@@ -1,6 +1,4 @@
-from operator import length_hint
 import matplotlib.pyplot as plt
-from numpy import string_
 from utils.colors import bcolors
 
 def plotGraphWithPath(graph, dotsArray, path):

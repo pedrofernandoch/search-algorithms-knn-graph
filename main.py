@@ -1,3 +1,4 @@
+from operator import le
 import time
 import getpass
 import copy
@@ -8,7 +9,7 @@ from search_algorithms.depth_first_search import depthFirstSearch
 from search_algorithms.best_first_search import bestFirstSearch
 from search_algorithms.a_search import aSearch
 from search_algorithms.a_start_search import aStarSearch
-from utils.plot_graph_with_path import plotGraphWithPath
+from utils.grpah import plotGraphWithPath, printGraphConnectivity
 from utils.colors import bcolors
 
 # Search Algorithms
@@ -54,20 +55,20 @@ print(f'Vértices gerados com {bcolors.OKGREEN}Sucesso{bcolors.ENDC}!\n')
 
 # Generating knn_graph
 print(f'{bcolors.OKCYAN}Criando grafo knn...\n{bcolors.ENDC}')
-knn_graph = kneighbors_graph(vertexArray, k, mode='connectivity')
+knn_graph = kneighbors_graph(vertexArray, k, mode='distance')
 knn_graph = knn_graph.toarray().tolist()
 # Creating copy to be be ploted later
 knn_graph_copy = copy.deepcopy(knn_graph)
-# Cleaning graph and putting neighbour index insted of 1
+# Cleaning graph and putting neighbour index
 for vertex in range(len(knn_graph)):
     for neighbour in range(len(knn_graph[vertex])):
         if knn_graph[vertex][neighbour]:
-            knn_graph[vertex][neighbour] = neighbour
+            knn_graph[vertex][neighbour] = (neighbour, knn_graph[vertex][neighbour])
         else:
             knn_graph[vertex][neighbour] = -1
     knn_graph[vertex] = list(filter(lambda v: v != -1, knn_graph[vertex]))
 
-print(knn_graph)
+#printGraphConnectivity(knn_graph)
 print(f'Grafo knn criado com {bcolors.OKGREEN}Sucesso{bcolors.ENDC}!\n')
 
 # Getting two input vertices
@@ -118,12 +119,13 @@ while True:
                     else:
                         print(f'{bcolors.FAIL}\nERRO: digite "s" para sim ou "n" para não.\n{bcolors.ENDC}')
             else: # Path not found
-                print(f'\nCaminho {bcolors.FAIL}não encontrado{bcolors.ENDC}.\n')
+                print(f'\nCaminho {bcolors.FAIL}não encontrado{bcolors.ENDC}.')
             break
         elif option == 6:
             pass
         else:
             print(f'{bcolors.FAIL}\nERRO: escolha uma das opções de 1 a 6, ou 0 para sair.\n{bcolors.ENDC}')
     except Exception:
+        print(Exception)
         print(f'{bcolors.FAIL}\nERRO: digite apenas números inteiros.\n{bcolors.ENDC}')
 print(f'\n{bcolors.HEADER}Tchau Tchau, até a próxima! :){bcolors.ENDC}')

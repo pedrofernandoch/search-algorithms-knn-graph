@@ -8,7 +8,7 @@ from search_algorithms.breadth_first_search import breadthFirstSearch
 from search_algorithms.depth_first_search import depthFirstSearch
 from search_algorithms.best_first_search import bestFirstSearch
 from search_algorithms.a_search import aSearch
-from search_algorithms.a_start_search import aStarSearch
+from search_algorithms.a_star_search import aStarSearch
 from utils.graph import plotGraphWithPath, printGraphConnectivity
 from utils.colors import bcolors
 
